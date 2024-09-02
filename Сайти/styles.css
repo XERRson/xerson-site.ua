@@ -1,0 +1,94 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Забезпечує висоту на всю висоту вікна браузера */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Мінімальна висота на всю висоту вікна браузера */
+}
+
+header {
+    text-align: center;
+    padding: 20px 10px; /* Збільшено padding для шапки */
+    background-color: #333;
+    color: #fff;
+}
+
+header h1 {
+    font-size: 24px; /* Розмір шрифту заголовка */
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #555;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background-color: #777;
+}
+
+main {
+    flex: 1; /* Заповнює доступний простір між шапкою і футером */
+    margin-left: 180px; /* Відступ для бокового меню */
+    padding: 20px;
+    padding-bottom: 60px; /* Відступ знизу, щоб уникнути перекриття футером */
+}
+
+aside {
+    position: fixed;
+    left: 0;
+    top: 100px;
+    width: 160px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+aside ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+aside ul li {
+    margin-bottom: 10px;
+}
+
+aside ul li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+aside ul li a:hover {
+    background-color: #bbb;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
