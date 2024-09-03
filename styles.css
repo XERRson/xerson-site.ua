@@ -48,7 +48,7 @@ nav ul li a:hover {
 
 main {
     flex: 1;
-    margin-left: 180px;
+    margin-left: 180px; /* Місце для бокового меню */
     padding: 20px;
     padding-bottom: 100px; /* Залишаємо місце для футера */
 }
@@ -56,14 +56,14 @@ main {
 aside {
     position: fixed;
     left: 0;
-    top: 100px;
+    top: 0; /* Починаємо з самого верху */
     width: 160px;
     background-color: #f4f4f4;
     padding: 10px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    z-index: 900; /* Додаємо z-index для бокового меню */
-    height: calc(100vh - 100px); /* Висота бокового меню на всю висоту екрану без шапки */
+    height: calc(100vh - 0px); /* Висота бокового меню на всю висоту екрану */
     overflow-y: auto; /* Додаємо скролл, якщо вміст не поміщається */
+    z-index: 900; /* Додаємо z-index для бокового меню */
 }
 
 aside ul {
