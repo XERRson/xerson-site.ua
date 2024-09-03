@@ -59,18 +59,22 @@ aside {
     left: 0;
     top: 0;
     width: 160px;
-    height: 100%;
+    height: calc(100vh - 60px); /* Висота бокового меню, щоб не перекривати футер */
     background-color: #f4f4f4;
-    padding: 10px;
+    padding: 20px 10px; /* Збільшене відступлення для покращення вигляду */
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     z-index: 1;
     box-sizing: border-box;
 }
 
+aside h3 {
+    margin-top: 20px; /* Відступ від верху для заголовка бокового меню */
+}
+
 aside ul {
     list-style-type: none;
     padding: 0;
-    margin-top: 60px; /* Зміщення вниз від шапки */
+    margin-top: 20px; /* Відступ від заголовка */
 }
 
 aside ul li {
@@ -138,10 +142,15 @@ footer {
         box-shadow: none;
     }
 
+    aside h3 {
+        margin-top: 10px; /* Зменшити відступ від верху на мобільних */
+    }
+
     aside ul {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        margin-top: 10px; /* Зменшити відступ від заголовка на мобільних */
     }
 
     aside ul li {
