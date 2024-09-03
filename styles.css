@@ -39,6 +39,8 @@ nav ul li a {
     color: #fff;
     background-color: #555;
     border-radius: 5px;
+    z-index: 1001; /* Вперед щодо бокового меню */
+    position: relative;
 }
 
 nav ul li a:hover {
@@ -46,20 +48,28 @@ nav ul li a:hover {
 }
 
 main {
-    flex: 1;
     margin-left: 180px;
-    padding: 200px;
+    padding: 20px;
     padding-bottom: 100px;
+    padding-top: 10px; /* Зменшено padding */
+    flex: 1;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 aside {
     position: fixed;
     left: 0;
-    top: 100px;
+    top: 0; /* Початок від верхнього краю */
+    bottom: 0; /* Тінь уздовж усієї сторінки */
     width: 160px;
     background-color: #f4f4f4;
     padding: 10px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Бокове меню під навігацією */
 }
 
 aside ul {
@@ -94,6 +104,10 @@ footer {
     width: 100%;
 }
 
+audio {
+    display: none; /* Приховує аудіо-плеєр */
+}
+
 /* Медіа-запити для мобільних пристроїв */
 @media (max-width: 768px) {
     header {
@@ -106,16 +120,17 @@ footer {
 
     nav ul {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start; /* Вирівнювання кнопок по лівій стороні */
     }
 
     nav ul li {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     nav ul li a {
         padding: 6px 12px;
         font-size: 14px;
+        display: block;
     }
 
     main {
@@ -133,12 +148,12 @@ footer {
 
     aside ul {
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
     aside ul li {
-        margin-bottom: 0;
+        margin-bottom: 10px;
     }
 
     aside ul li a {
