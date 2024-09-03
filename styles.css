@@ -16,7 +16,6 @@ header {
     padding: 10px 10px;
     background-color: #333;
     color: #fff;
-    z-index: 1000; /* Додаємо z-index для шапки */
 }
 
 header h1 {
@@ -48,22 +47,25 @@ nav ul li a:hover {
 
 main {
     flex: 1;
-    margin-left: 180px; /* Місце для бокового меню */
+    margin-left: 180px;
     padding: 20px;
-    padding-bottom: 100px; /* Залишаємо місце для футера */
+    padding-bottom: 100px;
+    background-color: #fff;
 }
 
 aside {
     position: fixed;
     left: 0;
-    top: 0; /* Починаємо з самого верху */
+    top: 0;
     width: 160px;
     background-color: #f4f4f4;
     padding: 10px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    height: calc(100vh - 0px); /* Висота бокового меню на всю висоту екрану */
+    height: 100%; /* Висота бокового меню на всю висоту сторінки */
     overflow-y: auto; /* Додаємо скролл, якщо вміст не поміщається */
-    z-index: 900; /* Додаємо z-index для бокового меню */
+    padding-top: 80px; /* Відступ від шапки */
+    padding-bottom: 50px; /* Відступ від футера */
+    box-sizing: border-box; /* Гарантуємо, що padding враховується у висоті */
 }
 
 aside ul {
@@ -93,10 +95,8 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000; /* Додаємо z-index для футера */
+    position: relative;
+    z-index: 1000;
 }
 
 /* Медіа-запити для мобільних пристроїв */
@@ -134,7 +134,9 @@ footer {
         left: 0;
         padding: 5px;
         box-shadow: none;
-        height: auto; /* Висота для мобільних пристроїв */
+        height: auto;
+        padding-top: 70px;
+        padding-bottom: 50px;
     }
 
     aside ul {
