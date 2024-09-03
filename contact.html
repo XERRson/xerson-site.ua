@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакти - Німецька автомобільна трійка</title>
+    <title>Контакти</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,19 +18,25 @@
         </nav>
     </header>
 
+    <aside>
+        <h3>Бокове меню</h3>
+        <ul>
+            <li><a href="#contact">Контактна форма</a></li>
+        </ul>
+    </aside>
+
     <main>
-        <h2>Контактна інформація</h2>
-        <p>Будь ласка, зв'яжіться зі мною за допомогою форми нижче:</p>
+        <h2 id="contact">Контактна форма</h2>
         <form action="#" method="post">
-            <label for="name">Ваше ім'я:</label>
+            <label for="name">Ім'я:</label>
             <input type="text" id="name" name="name" required>
-
-            <label for="email">Ваш email:</label>
+            <br>
+            <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-
+            <br>
             <label for="message">Повідомлення:</label>
-            <textarea id="message" name="message" required></textarea>
-
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <br>
             <input type="submit" value="Відправити">
         </form>
     </main>
@@ -38,5 +44,11 @@
     <footer>
         <p>Контактна інформація: hryhorovych.pavlo@chnu.edu.ua | Телефон: +380676458185</p>
     </footer>
+
+    <!-- Аудіо плеєр -->
+    <audio controls autoplay loop>
+        <source src="audio/shugar-bmw.mp3" type="audio/mpeg">
+        Ваш браузер не підтримує елемент audio.
+    </audio>
 </body>
 </html>
