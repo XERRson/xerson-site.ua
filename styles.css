@@ -57,19 +57,23 @@ main {
 aside {
     position: fixed;
     left: 0;
-    top: 0;
+    top: 100px; /* Відступ від шапки */
     width: 160px;
-    height: 100%;
+    height: calc(100% - 100px); /* Відняти висоту шапки */
     background-color: #f4f4f4;
     padding: 10px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     z-index: 1;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Вирівнювання вмісту меню донизу */
 }
 
 aside ul {
     list-style-type: none;
     padding: 0;
+    margin-top: auto; /* Для зміщення елементів вниз */
 }
 
 aside ul li {
@@ -94,9 +98,10 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
+    margin-top: auto; /* Футер завжди буде внизу контенту */
 }
 
 /* Медіа-запити для мобільних пристроїв */
