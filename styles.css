@@ -16,6 +16,8 @@ header {
     padding: 10px 10px;
     background-color: #333;
     color: #fff;
+    z-index: 2;
+    position: relative;
 }
 
 header h1 {
@@ -50,7 +52,6 @@ main {
     margin-left: 180px;
     padding: 20px;
     padding-bottom: 100px;
-    background-color: #fff;
 }
 
 aside {
@@ -58,14 +59,12 @@ aside {
     left: 0;
     top: 0;
     width: 160px;
+    height: 100%;
     background-color: #f4f4f4;
     padding: 10px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    height: 100%; /* Висота бокового меню на всю висоту сторінки */
-    overflow-y: auto; /* Додаємо скролл, якщо вміст не поміщається */
-    padding-top: 80px; /* Відступ від шапки */
-    padding-bottom: 50px; /* Відступ від футера */
-    box-sizing: border-box; /* Гарантуємо, що padding враховується у висоті */
+    z-index: 1;
+    box-sizing: border-box;
 }
 
 aside ul {
@@ -95,8 +94,9 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: relative;
-    z-index: 1000;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 /* Медіа-запити для мобільних пристроїв */
@@ -132,11 +132,9 @@ footer {
         width: 100%;
         top: 0;
         left: 0;
+        height: auto;
         padding: 5px;
         box-shadow: none;
-        height: auto;
-        padding-top: 70px;
-        padding-bottom: 50px;
     }
 
     aside ul {
