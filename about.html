@@ -1,177 +1,104 @@
-/* Загальні стилі */
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Про себе</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Стилі для таблиці */
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Об'єднує межі комірок */
+            margin: 20px 0; /* Відступи навколо таблиці */
+        }
+        
+        th, td {
+            border: 1px solid #ddd; /* Легкі рамки для комірок */
+            padding: 8px; /* Відступи всередині комірок */
+            text-align: left; /* Вирівнювання тексту в комірках */
+        }
+        
+        th {
+            background-color: #f4f4f4; /* Фон для заголовків таблиці */
+            font-weight: bold; /* Жирний шрифт для заголовків */
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Зміна фону для парних рядків */
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1; /* Фон для рядків при наведенні */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Німецька автомобільна трійка</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="about.html">Про себе</a></li>
+                <li><a href="contact.html">Контакти</a></li>
+            </ul>
+        </nav>
+    </header>
 
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
+    <aside>
+        <h3>Бокове меню</h3>
+        <ul>
+            <li><a href="#section1">Про мене</a></li>
+            <li><a href="#section2">Освіта</a></li>
+            <li><a href="#section3">Хобі та інтереси</a></li>
+            <li><a href="#section4">Проекти</a></li>
+        </ul>
+    </aside>
 
-header {
-    text-align: center;
-    padding: 10px 10px;
-    background-color: #333;
-    color: #fff;
-    z-index: 2; /* Вищий z-index для шапки */
-    position: relative;
-}
+    <main>
+        <h2 id="section1">Про мене</h2>
+        <p>Вітаю! Мене звуть Павло, і я студент. Я працюю у сфері криптовалюти і маю пів року досвіду. Мої навички включають в себе:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Навичка</th>
+                    <th>Опис</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Аналіз ринку криптовалюти</td>
+                    <td>Оцінка і прогнозування трендів на ринку криптовалют.</td>
+                </tr>
+                <tr>
+                    <td>Аналіз надійності дропів</td>
+                    <td>Перевірка та аналіз нових криптовалютних проєктів.</td>
+                </tr>
+                <tr>
+                    <td>Спотова торгівля</td>
+                    <td>Торговля криптовалютами на спотових ринках.</td>
+                </tr>
+            </tbody>
+        </table>
 
-header h1 {
-    font-size: 24px;
-    margin: 0;
-}
+        <h3 id="section2">Освіта</h3>
+        <p>Я здобуваю вищу освіту в Чернівецькому національному університеті, де навчаюсь за спеціальністю "Комп'ютерна інженерія".</p>
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
+        <h3 id="section3">Хобі та інтереси</h3>
+        <p>У вільний час я люблю пограти в онлайн ігри. Мене також цікавить прослуховування музики, і я активно вчусь грати на гітарі.</p>
 
-nav ul li a {
-    text-decoration: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #555;
-    border-radius: 5px;
-}
+        
 
-nav ul li a:hover {
-    background-color: #777;
-}
+        <h3>Контактна інформація</h3>
+        <p>Якщо я комусь потрібен (ні), то шукайте мене де-інде, а краще взагалі не шукайте😃</p>
+    </main>
 
-main {
-    flex: 1;
-    margin-left: 180px;
-    padding: 20px;
-    padding-bottom: 100px; /* Відступ для футера */
-}
-
-aside {
-    position: fixed;
-    left: 0;
-    top: 300px; /* Зміщення вниз на 300 пікселів */
-    width: 160px;
-    height: calc(100vh - 300px); /* Висота бокового меню, щоб не перекривати футер */
-    background-color: #f4f4f4;
-    padding: 20px 10px; /* Збільшене відступлення для покращення вигляду */
-    box-shadow: 2px 0 10px rgba(0,0,0,0.2); /* Корегована тінь */
-    z-index: 1; /* Менший z-index для бокового меню */
-}
-
-aside h3 {
-    margin-top: 0; /* Зменшити відступ від верху для заголовка бокового меню */
-}
-
-aside ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px; /* Відступ від заголовка */
-}
-
-aside ul li {
-    margin-bottom: 10px;
-}
-
-aside ul li a {
-    text-decoration: none;
-    color: #000;
-    display: block;
-    padding: 10px;
-    background-color: #ddd;
-    border-radius: 5px;
-}
-
-aside ul li a:hover {
-    background-color: #bbb;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 2; /* Вищий z-index для футера */
-}
-
-/* Медіа-запити для мобільних пристроїв */
-@media (max-width: 768px) {
-    header {
-        padding: 15px 5px;
-    }
-
-    header h1 {
-        font-size: 20px;
-    }
-
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    nav ul li {
-        margin-bottom: 10px;
-    }
-
-    nav ul li a {
-        padding: 6px 12px;
-        font-size: 14px;
-    }
-
-    main {
-        margin-left: 0;
-        padding: 15px;
-    }
-
-    aside {
-        width: 100%;
-        height: auto;
-        top: 0;
-        left: 0;
-        padding: 5px;
-        box-shadow: none;
-        z-index: 1; /* Вищий z-index для бокового меню на мобільних */
-    }
-
-    aside h3 {
-        margin-top: 10px; /* Зменшити відступ від верху на мобільних */
-    }
-
-    aside ul {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        margin-top: 10px; /* Зменшити відступ від заголовка на мобільних */
-    }
-
-    aside ul li {
-        margin-bottom: 0;
-    }
-
-    aside ul li a {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    iframe {
-        width: 100%;
-        height: auto;
-        max-width: 560px;
-        display: block;
-        margin: 0 auto;
-    }
-
-    footer {
-        padding: 10px 5px;
-    }
-}
+    <footer>
+        <p>Контактна інформація: hryhorovych.pavlo@chnu.edu.ua | Телефон: +380676458185</p>
+    </footer>
+     <audio controls autoplay loop>
+        <source src="audio/shugar-bmw.mp3" type="audio/mpeg">
+        Ваш браузер не підтримує елемент audio.
+    </audio>
+</body>
+</html>
