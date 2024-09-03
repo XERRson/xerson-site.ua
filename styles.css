@@ -16,7 +16,7 @@ header {
     padding: 10px 10px;
     background-color: #333;
     color: #fff;
-    z-index: 2;
+    z-index: 2; /* Вищий z-index для шапки */
     position: relative;
 }
 
@@ -63,7 +63,7 @@ aside {
     background-color: #f4f4f4;
     padding: 20px 10px; /* Збільшене відступлення для покращення вигляду */
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    z-index: 1;
+    z-index: 1; /* Менший z-index для бокового меню */
     box-sizing: border-box;
 }
 
@@ -102,6 +102,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 2; /* Вищий z-index для футера */
 }
 
 /* Медіа-запити для мобільних пристроїв */
@@ -140,6 +141,7 @@ footer {
         left: 0;
         padding: 5px;
         box-shadow: none;
+        z-index: 1; /* Вищий z-index для бокового меню на мобільних */
     }
 
     aside h3 {
