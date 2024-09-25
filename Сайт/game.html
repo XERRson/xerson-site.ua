@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Німецька автомобільна трійка</title>
+    <link rel="stylesheet" href="styles.css">
+	<script src="script.js"></script>
+    <header>
+        <h1>Міні-гра</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="about.html">Про себе</a></li>
+                <li><a href="contact.html">Контакти</a></li>
+                <li><a href="game.html">Міні-гра</a></li>
+                <li><a href="calculate.html">Калькулятор</a></li>
+            </ul>
+        </nav>
+    </header>
+    <style>
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            font-size: 28px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        nav ul li a:hover {
+            background-color: #777;
+            border-radius: 5px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #555;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding-bottom: 0px;
+            padding-top: 70px;
+        }
+
+        .gameArea {
+            position: relative;
+            width: 300px;
+            height: 600px;
+            background-color: #707070;
+            overflow: hidden;
+            border: 2px solid white;
+            background-image:
+                linear-gradient(#707070 90px, transparent 90px),
+                linear-gradient(to right, white 5px, transparent 5px),
+                linear-gradient(to right, white 5px, transparent 5px);
+            background-size: 100% 100px, 300px 100%, 100px 100%;
+            background-position: center top, 100px 0, 200px 0;
+            animation: roadMove 1s linear infinite;
+        }
+
+        @keyframes roadMove {
+            0% {
+                background-position: center top, 100px 0, 200px 0;
+            }
+
+            100% {
+                background-position: center bottom, 100px 100%, 200px 100%;
+            }
+        }
+
+        .car {
+            position: absolute;
+            width: 50px;
+            height: 120px;
+            background-image: url('Images/bmw.png');
+            background-size: cover;
+            top: 470px;
+            left: 130px;
+        }
+
+        .obstacle {
+            position: absolute;
+            width: 50px;
+            height: 120px;
+            background-size: cover;
+        }
+
+        .obstacle.yellow {
+            background-image: url('Images/audi.png');
+        }
+
+        .obstacle.green {
+            background-image: url('Images/mercedes.png');
+        }
+
+        .score {
+            margin-top: 10px;
+            font-size: 20px;
+            color: white;
+        }
+
+        .left-border, .right-border {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background-color: white;
+        }
+
+        .left-border {
+            left: 0;
+        }
+
+        .right-border {
+            right: 0;
+        }
+
+        .controls {
+            display: none;
+        }
+
+        .control-btn {
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            background-image: none; 
+        }
+
+        .control-btn:active {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .controls {
+                display: flex;
+            }
+            #left-btn {
+                background-image: url('Images/left-arrow.png');
+            }
+            #right-btn {
+                background-image: url('Images/right-arrow.png');
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="score">Рахунок: 0</div>
+    <div class="gameArea">
+        <div class="car"></div>
+        <div class="left-border"></div>
+        <div class="right-border"></div>
+    </div>
+
+    <div class="controls">
+        <div class="control-btn" id="left-btn"></div>
+        <div class="control-btn" id="right-btn"></div>
+    </div>
+
+   <script>
+    const gameArea = document.querySelector('.gameArea');
+    const car = document.querySelector('.car');
+    const scoreDisplay = document.querySelector('.score');
+    const leftBtn = document.getElementById('left-btn');
+    const rightBtn = document.getElementById('right-btn');
+    let isGameActive = false;
+    let score = 0;
+    let carPosition = { lane: 1, y: 470 };
+    let obstacles = [];
+    let speed = 2;
+    let lanes = [25, 130, 225];  // Позиції смуг
+    let maxObstacles = 2;  // Максимальна кількість одночасних перешкод
+    let minDistance = 200;  // Мінімальна безпечна відстань між перешкодами
+    let animationFrameId;
+
+    document.addEventListener('keydown', handleKeyDown);
+    leftBtn.addEventListener('touchstart', () => moveCarTouch('left'));
+    rightBtn.addEventListener('touchstart', () => moveCarTouch('right'));
+
+    function handleKeyDown(e) {
+        if (e.key === 'Enter') {
+            startGame();
+        }
+        moveCar(e);
+    }
+
+    function isTouchDevice() {
+        return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        if (isTouchDevice()) {
+            document.querySelector('.controls').style.display = 'flex';
+        }
+    });
+
+    function startGame() {
+        if (!isGameActive) {
+            resetGame();
+            isGameActive = true;
+            gameLoop();
+        }
+    }
+
+    function moveCar(e) {
+        if (!isGameActive) return;
+
+        if (['ArrowLeft', 'ф', 'a'].includes(e.key) && carPosition.lane > 0) {
+            carPosition.lane -= 1;
+        } else if (['ArrowRight', 'в', 'd'].includes(e.key) && carPosition.lane < 2) {
+            carPosition.lane += 1;
+        }
+        car.style.left = `${lanes[carPosition.lane]}px`;
+    }
+
+    function moveCarTouch(direction) {
+        if (!isGameActive) return;
+
+        if (direction === 'left' && carPosition.lane > 0) {
+            carPosition.lane -= 1;
+        } else if (direction === 'right' && carPosition.lane < 2) {
+            carPosition.lane += 1;
+        }
+        car.style.left = `${lanes[carPosition.lane]}px`;
+    }
+
+    function gameLoop() {
+        if (!isGameActive) return;
+        moveObstacles();
+        detectCollision();
+        updateScore();
+        animationFrameId = requestAnimationFrame(gameLoop);
+    }
+
+    function moveObstacles() {
+        obstacles.forEach(obstacle => {
+            obstacle.y += speed;
+            obstacle.el.style.top = `${obstacle.y}px`;
+
+            // Видаляємо перешкоди, які вийшли за межі екрану
+            if (obstacle.y > 600) {
+                gameArea.removeChild(obstacle.el);
+                obstacles = obstacles.filter(o => o !== obstacle);
+                score++;
+            }
+        });
+
+        // Додаємо нові перешкоди, якщо їх менше, ніж максимальна кількість
+        if (obstacles.length < maxObstacles) {
+            addObstacle();
+        }
+    }
+
+    function updateScore() {
+        scoreDisplay.textContent = `Рахунок: ${score}`;
+    }
+
+    function detectCollision() {
+        obstacles.forEach(obstacle => {
+            if (
+                carPosition.lane === obstacle.lane &&
+                carPosition.y < obstacle.y + 120 &&
+                carPosition.y + 120 > obstacle.y
+            ) {
+                endGame();
+            }
+        });
+    }
+
+    function addObstacle() {
+        // Генеруємо смугу для перешкоди
+        let availableLanes = lanes.filter((lane, index) => {
+            // Забороняємо створення перешкоди в смузі, якщо в сусідній смузі вже є перешкода на небезпечній відстані
+            return !obstacles.some(obstacle => {
+                return (
+                    Math.abs(obstacle.lane - index) <= 1 &&  // Перешкода у сусідній смузі
+                    obstacle.y < minDistance  // Перешкода занадто близько
+                );
+            });
+        });
+
+        if (availableLanes.length === 0) return;  // Якщо немає доступних смуг, не додаємо перешкоду
+
+        let obstacleLane = availableLanes[Math.floor(Math.random() * availableLanes.length)];
+        let obstacleY = -120;
+
+        // Створюємо нову перешкоду
+        let newObstacle = document.createElement('div');
+        newObstacle.classList.add('obstacle', Math.random() > 0.5 ? 'yellow' : 'green');
+        newObstacle.style.left = `${obstacleLane}px`;
+        newObstacle.style.top = `${obstacleY}px`;
+        gameArea.appendChild(newObstacle);
+
+        obstacles.push({ el: newObstacle, lane: lanes.indexOf(obstacleLane), y: obstacleY });
+
+        // Додаємо випадкову затримку для наступної перешкоди
+        setTimeout(addObstacle, Math.random() * 2000 + 1000); // Затримка між 1 і 3 секундами
+    }
+
+    function endGame() {
+        isGameActive = false;
+        cancelAnimationFrame(animationFrameId);
+        alert(`Гра закінчена! Ваш рахунок: ${score}`);
+        obstacles.forEach(obstacle => gameArea.removeChild(obstacle.el));
+        obstacles = [];
+    }
+
+    function resetGame() {
+        carPosition = { lane: 1, y: 470 };
+        car.style.left = `${lanes[carPosition.lane]}px`;
+        isGameActive = true;
+        score = 0;
+        scoreDisplay.textContent = `Рахунок: ${score}`;
+        obstacles.forEach(obstacle => gameArea.removeChild(obstacle.el));
+        obstacles = [];
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        gameLoop();
+    }
+</script>
+
+
+
+
+
+</body>
+</html>

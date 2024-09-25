@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Німецька автомобільна трійка</title>
+    <link rel="stylesheet" href="styles.css">
+	<script src="script.js"></script>
+
+</head>
+<body>
+    <header>
+        <h1>Німецька автомобільна трійка</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="about.html">Про себе</a></li>
+                <li><a href="contact.html">Контакти</a></li>
+                <li><a href="game.html">Міні-гра</a></li>
+				<li><a href="calculate.html">Калькулятор</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <aside>
+        <h3>        ㅤ</h3>
+        <ul>
+            <li><a href="#bmw">BMW</a></li>
+            <li><a href="#audi">Audi</a></li>
+            <li><a href="#mercedes">Mercedes-Benz</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <img width="560" height="315" src="images/bam.png" alt="beca">
+        <h2>Вітання на сайті про Німецьку автомобільну трійку!</h2>
+        <p>Німецька автомобільна трійка включає в себе три найбільші преміум-бренди: </p>
+        <ul>
+            <li>Audi</li>
+            <li>BMW</li>
+            <li>Mercedes-Benz</li>
+        </ul>
+
+        <h3 id="bmw">Відео про BMW</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/U8RCWJkd2lE?si=VGebG--UOfY0HKI8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+        <h3 id="audi">Відео про Audi</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/zyHItUcCLMk?si=Ns19qeSHAOMTM2r-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+        <h3 id="mercedes">Відео про Mercedes-Benz</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/sVlGVbs3yu0?si=if6OiiE-9_rV1VwN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </main>
+
+    <footer>
+        <p>Контактна інформація: hryhorovych.pavlo@chnu.edu.ua | Телефон: +380676458185</p>
+    </footer>
+	  <!-- JavaScript для активації анімацій -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Додаємо клас "visible" до body для активації анімації
+            document.body.classList.add("visible");
+            
+            // Додаємо клас "visible" до кожного елемента по черзі для анімації появи
+            document.querySelectorAll('header, aside, main, footer').forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add("visible");
+                }, 200 * index); // Затримка в 200мс для кожного елемента
+            });
+        });
+    </script>	
+
+    <audio controls autoplay loop>
+        <source src="audio/shugar-bmw.mp3" type="audio/mpeg">
+        Ваш браузер не підтримує елемент audio.
+    </audio>
+</body>
+</html>

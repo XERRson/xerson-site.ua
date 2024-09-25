@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор розходу палива</title>
+    <link rel="stylesheet" href="styles.css">
+	<script src="script.js"></script>
+    <style>
+        /* Стилі шапки та меню */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            font-size: 28px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        nav ul li a:hover {
+            background-color: #777;
+            border-radius: 5px;
+        }
+
+        /* Основний контент */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding-top: 0px; /* Відступ під шапку */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 110vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select, input {
+            width: calc(100% - 25px); /* Поля для вводу та вибору одного розміру */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Таблиця цін */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .price-table th, .price-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .price-table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Калькулятор розходу палива</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="about.html">Про себе</a></li>
+                <li><a href="contact.html">Контакти</a></li>
+                <li><a href="game.html">Міні-гра</a></li>
+                <li><a href="calculate.html">Калькулятор</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Калькулятор розходу палива</h2>
+
+        <!-- Таблиця цін на паливо -->
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Тип пального</th>
+                    <th>Ціна/грн</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Дизель</td>
+                    <td>47.59 грн/л</td>
+                </tr>
+                <tr>
+                    <td>Бензин</td>
+                    <td>52.99 грн/л</td>
+                </tr>
+                <tr>
+                    <td>Газ</td>
+                    <td>32.99 грн/л</td>
+                </tr>
+                <tr>
+                    <td>Електрика</td>
+                    <td>4.32 грн/кВт</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <label for="fuelType">Тип палива:</label>
+        <select id="fuelType">
+            <option value="diesel">Дизель</option>
+            <option value="petrol">Бензин</option>
+            <option value="gas">Газ</option>
+            <option value="electric">Електрика</option>
+        </select>
+
+        <label for="consumption">Розхід (л/100 км або кВт/100 км):</label>
+        <input type="number" id="consumption" placeholder="Введіть розхід палива" step="0.1">
+
+        <label for="distance">Кількість кілометрів:</label>
+        <input type="number" id="distance" placeholder="Введіть кількість км" step="0.1">
+
+        
+
+        <div class="result" id="result"></div>
+		<div></div>
+    </div>
+
+
+    <footer>
+        <p>Контактна інформація: hryhorovych.pavlo@chnu.edu.ua | Телефон: +380676458185</p>
+    </footer>
+
+    <script>
+        function calculateFuel() {
+		
+            const fuelType = document.getElementById('fuelType').value;
+            const consumption = parseFloat(document.getElementById('consumption').value);
+            const distance = parseFloat(document.getElementById('distance').value);
+            const resultDiv = document.getElementById('result');
+
+            // Константи цін на паливо
+            const fuelPrices = {
+                diesel: 47.59,
+                petrol: 52.99,
+                electric: 4.32,
+            };
+
+            // Перевіряємо правильність введення даних
+            if (isNaN(consumption) || isNaN(distance) || consumption <= 0 || distance <= 0) {
+                resultDiv.innerHTML = "Будь ласка, введіть коректні дані.";
+                return;
+            }
+
+            // Розрахунок спожитого палива/електрики
+            const totalConsumption = (consumption / 100) * distance;
+            let unit;
+            let cost = 0;
+
+            switch(fuelType) {
+                case 'diesel':
+                case 'petrol':
+                    unit = 'літрів';
+                    cost = totalConsumption * fuelPrices[fuelType];
+                    break;
+                case 'electric':
+                    unit = 'кВт';
+                    cost = totalConsumption * fuelPrices[fuelType];
+                    break;
+					
+            }
+            resultDiv.innerHTML = `Витрата ${unit}: ${totalConsumption.toFixed(2)} на ${distance} км.<br>Вартість: ${cost.toFixed(2)} грн.`;
+        }
+		document.getElementById('consumption').addEventListener("change", calculateFuel);
+		document.getElementById('distance').addEventListener("change", calculateFuel);
+		
+   </script>
+</body>
+</html>

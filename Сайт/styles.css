@@ -1,0 +1,198 @@
+/* Загальні стилі */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 10px 10px;
+    background-color: #333;
+    color: #fff;
+    z-index: 2; /* Вищий z-index для шапки */
+    position: relative;
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #555;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background-color: #777;
+}
+
+main {
+    flex: 1;
+    margin-left: 180px;
+    padding: 20px;
+    padding-bottom: 100px; /* Відступ для футера */
+}
+
+aside {
+    position: fixed;
+    left: 0;
+    top: 1; /* Встановлюємо верхній край бокового меню на верх шапки */
+    width: 160px;
+    height: calc(100vh - 0px); /* Висота бокового меню від верхнього до нижнього краю екрана */
+    background-color: #f4f4f4;
+    padding: 20px 10px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2); /* Корегована тінь */
+    z-index: 1; /* Менший z-index для бокового меню */
+}
+
+aside h3 {
+    margin-top: 20px; /* Відступ від верхнього краю бокового меню */
+}
+
+aside ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px; /* Відступ від заголовка */
+}
+
+aside ul li {
+    margin-bottom: 10px;
+}
+
+aside ul li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+aside ul li a:hover {
+    background-color: #bbb;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding:10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 2; /* Вищий z-index для футера */
+}
+
+/* Медіа-запити для мобільних пристроїв */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 5px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-bottom: 10px;
+    }
+
+    nav ul li a {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    main {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    aside {
+        width: 100%;
+        height: auto;
+        top: 0;
+        left: 0;
+        padding: 5px;
+        box-shadow: none;
+        z-index: 1; /* Вищий z-index для бокового меню на мобільних */
+    }
+
+    aside h3 {
+        margin-top: 10px; /* Зменшити відступ від верху на мобільних */
+    }
+
+    aside ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 10px; /* Зменшити відступ від заголовка на мобільних */
+    }
+
+    aside ul li {
+        margin-bottom: 0;
+    }
+
+    aside ul li a {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    iframe {
+        width: 100%;
+        height: auto;
+        max-width: 560px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    footer {
+        padding: 10px 5px;
+    }
+}
+  .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            width: 100px; /* Ширина для вирівнювання підписів */
+            margin-right: 10px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            flex: 1; /* Розтягуємо поля для заповнення на доступний простір */
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+		
